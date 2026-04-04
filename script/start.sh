@@ -2,15 +2,16 @@
 #
 # Script Name: start.sh
 #
-# Version:      1.0
+# Version:      1.1
 # Author:       Naoki Hirata
-# Date:         2026-03-13
+# Date:         2026-04-05
 # Usage:        start.sh [-test] [--help]
 # Options:      -test      test mode execution with the latest source package
 #               --help     show this help message
 # Description:  This script builds Docker and Go sample environment by one-liner command.
 # Version History:
 #               1.0  (2026-03-13) Initial release
+#               1.1  (2026-04-05) Fix SIGPIPE/pipefail issue when extracting archive directory name
 # License:      MIT License
 
 set -e
@@ -172,7 +173,7 @@ for file in $savefilelist; do
 done
 
 # Get archive directory name
-destdir=$(tar tzf "${filepath}" | head -n 1)
+destdir=$(tar tzf "${filepath}" | head -n 1) || true
 destdirname=$(basename "$destdir")
 log_info "Extracting archive: ${filename}"
 
