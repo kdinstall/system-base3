@@ -20,9 +20,20 @@
           - git
           - curl
           - ca-certificates
+          - gnupg
           - sqlite3
-          - nodejs
-          - npm
+        state: present
+
+    - name: Configure NodeSource repository for Node.js 20
+      shell: |
+        set -euo pipefail
+        curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
+      args:
+        creates: /etc/apt/sources.list.d/nodesource.list
+
+    - name: Install Node.js 20
+      package:
+        name: nodejs
         state: present
 
     - name: Create group for app user
@@ -73,7 +84,7 @@
       register: app_binary
 
     - name: Build Go sample app
-      command: /usr/bin/env bash -lc 'cd {{ app_project_dir }} && npm install && npm run build && go build -o {{ app_bin_path }} ./src'
+      command: /usr/bin/env bash -lc 'cd {{ app_project_dir }} && rm -rf node_modules package-lock.json && npm install --include=optional && npm run build && go build -o {{ app_bin_path }} ./src'
       when: go_project_result.changed or not app_binary.stat.exists
       notify: Restart go sample service
 
