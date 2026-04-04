@@ -1,0 +1,94 @@
+{{ define "users.html" }}
+{{ template "header" . }}
+
+<div class="flex items-center justify-between mb-6">
+  <div class="flex items-center gap-3">
+    <h1 class="text-2xl font-bold text-gray-800">ユーザ一覧</h1>
+    {{- if .users }}
+    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-base font-semibold bg-blue-100 text-blue-700">{{ len .users }} 件</span>
+    {{- end }}
+  </div>
+  <a href="/users/new"
+     class="inline-flex items-center gap-1.5 bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white text-base font-semibold px-4 py-2 rounded-lg shadow-sm transition-colors whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+    <span class="material-symbols-outlined text-lg">add</span>
+    新規作成
+  </a>
+</div>
+
+{{- if .flash }}
+  {{- if eq .flash "created" }}
+  <div class="mb-4 flex items-center gap-3 rounded-lg border-l-4 border-green-500 bg-green-50 px-4 py-3 text-base text-green-800">
+    <span class="material-symbols-outlined text-green-500 text-xl">check_circle</span> ユーザを登録しました。
+  </div>
+  {{- else if eq .flash "updated" }}
+  <div class="mb-4 flex items-center gap-3 rounded-lg border-l-4 border-blue-500 bg-blue-50 px-4 py-3 text-base text-blue-800">
+    <span class="material-symbols-outlined text-blue-500 text-xl">check_circle</span> ユーザ情報を更新しました。
+  </div>
+  {{- else if eq .flash "deleted" }}
+  <div class="mb-4 flex items-center gap-3 rounded-lg border-l-4 border-yellow-500 bg-yellow-50 px-4 py-3 text-base text-yellow-800">
+    <span class="material-symbols-outlined text-yellow-500 text-xl">delete</span> ユーザを削除しました。
+  </div>
+  {{- end }}
+{{- end }}
+
+{{- if .error }}
+<div class="mb-4 flex items-center gap-3 rounded-lg border-l-4 border-red-500 bg-red-50 px-4 py-3 text-base text-red-800">
+  <span class="material-symbols-outlined text-red-500 text-xl">error</span> {{ .error }}
+</div>
+{{- end }}
+
+<div class="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
+  {{- if .users }}
+  <table class="w-full text-base">
+    <thead class="bg-gray-50 border-b border-gray-200">
+      <tr>
+        <th class="px-6 py-3.5 text-left text-base font-semibold text-gray-500 uppercase tracking-wider w-16">ID</th>
+        <th class="px-6 py-3.5 text-left text-base font-semibold text-gray-500 uppercase tracking-wider">名前</th>
+        <th class="px-6 py-3.5 text-left text-base font-semibold text-gray-500 uppercase tracking-wider">メールアドレス</th>
+        <th class="px-6 py-3.5 text-left text-base font-semibold text-gray-500 uppercase tracking-wider">登録日時</th>
+        <th class="px-6 py-3.5 text-center text-base font-semibold text-gray-500 uppercase tracking-wider w-32">操作</th>
+      </tr>
+    </thead>
+    <tbody class="divide-y divide-gray-100">
+      {{- range .users }}
+      <tr class="hover:bg-blue-50/40 transition-colors">
+        <td class="px-6 py-4 text-gray-400 font-mono text-base">{{ .id }}</td>
+        <td class="px-6 py-4 font-semibold text-gray-800">{{ .name }}</td>
+        <td class="px-6 py-4 text-gray-500">{{ .email }}</td>
+        <td class="px-6 py-4 text-gray-400 text-base">{{ .created_at }}</td>
+        <td class="px-6 py-4 whitespace-nowrap">
+          <div class="flex items-center justify-center gap-2">
+            <a href="/users/{{ .id }}/edit"
+               class="inline-flex items-center gap-1.5 text-base bg-blue-50 hover:bg-blue-100 border border-blue-200 hover:border-blue-300 text-blue-700 font-medium px-3 py-1.5 rounded-md transition-colors whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-1">
+              <span class="material-symbols-outlined text-base">edit</span> 編集
+            </a>
+            <form method="POST" action="/users/{{ .id }}/delete"
+                  onsubmit="return confirm('「{{ .name }}」を削除しますか？');">
+              <button type="submit"
+                      class="inline-flex items-center gap-1.5 text-base bg-red-50 hover:bg-red-100 border border-red-200 hover:border-red-300 text-red-600 hover:text-red-700 font-medium px-3 py-1.5 rounded-md transition-colors whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-offset-1">
+                <span class="material-symbols-outlined text-base">delete</span> 削除
+              </button>
+            </form>
+          </div>
+        </td>
+      </tr>
+      {{- end }}
+    </tbody>
+  </table>
+  {{- else }}
+  <div class="px-6 py-20 text-center">
+    <span class="material-symbols-outlined text-6xl text-gray-300 mb-3">person</span>
+    <p class="text-base font-semibold text-gray-600 mb-1">ユーザが登録されていません</p>
+    <p class="text-base text-gray-400 mb-5">最初のユーザを作成してみましょう。</p>
+    <a href="/users/new"
+       class="inline-flex items-center gap-1.5 bg-blue-600 hover:bg-blue-700 text-white text-base font-semibold px-4 py-2 rounded-lg shadow-sm transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+      <span class="material-symbols-outlined text-lg">add</span>
+      新規作成する
+    </a>
+  </div>
+  {{- end }}
+</div>
+
+
+{{ template "footer" . }}
+{{ end }}

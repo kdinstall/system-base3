@@ -1,0 +1,13 @@
+{
+  "name": "web-sqlx-sqlite-user",
+  "version": "1.0.0",
+  "description": "User management web app - Tailwind CSS v4",
+  "scripts": {
+    "build": "tailwindcss -i ./src/style/input.css -o ./public/assets/css/style.css",
+    "watch": "tailwindcss -i ./src/style/input.css -o ./public/assets/css/style.css --watch"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.2.2",
+    "tailwindcss": "^4.2.2"
+  }
+}
