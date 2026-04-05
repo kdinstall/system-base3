@@ -13,7 +13,7 @@
     app_port: "8080"
 
   tasks:
-    - name: Install packages for Go sample app
+    - name: Install packages for Go web app
       package:
         name:
           - golang-go
@@ -84,10 +84,10 @@
         path: "{{ app_bin_path }}"
       register: app_binary
 
-    - name: Build Go sample app
+    - name: Build Go web app
       command: /usr/bin/env bash -lc 'cd {{ app_project_dir }} && rm -rf node_modules package-lock.json && npm install --include=optional && npm run build && go build -o {{ app_bin_path }} ./src'
       when: go_project_result.changed or not app_binary.stat.exists
-      notify: Restart go sample service
+      notify: Restart go web service
 
     - name: Set binary ownership
       file:
@@ -120,9 +120,9 @@
           WantedBy=multi-user.target
       notify:
         - Reload systemd
-        - Restart go sample service
+        - Restart go web service
 
-    - name: Enable and start go sample service
+    - name: Enable and start go web service
       systemd:
         name: "{{ app_name }}"
         enabled: true
@@ -133,7 +133,7 @@
       systemd:
         daemon_reload: true
 
-    - name: Restart go sample service
+    - name: Restart go web service
       systemd:
         name: "{{ app_name }}"
         state: restarted
