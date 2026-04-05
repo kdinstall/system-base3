@@ -98,11 +98,11 @@
 
     - name: Install systemd unit
       copy:
-        dest: /etc/systemd/system/go-sample.service
+        dest: /etc/systemd/system/{{ app_name }}.service
         mode: "0644"
         content: |
           [Unit]
-          Description=Go sample web application
+          Description={{ app_name }} web application
           After=network-online.target docker.service
           Wants=network-online.target
 
@@ -124,7 +124,7 @@
 
     - name: Enable and start go sample service
       systemd:
-        name: go-sample
+        name: "{{ app_name }}"
         enabled: true
         state: started
 
@@ -135,5 +135,5 @@
 
     - name: Restart go sample service
       systemd:
-        name: go-sample
+        name: "{{ app_name }}"
         state: restarted
