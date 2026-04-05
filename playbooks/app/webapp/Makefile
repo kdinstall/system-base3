@@ -14,7 +14,7 @@ run: build
 
 ## Go バイナリのビルド（CSS ビルドも含む）
 binary: build
-	go build -o web-sqlx-sqlite-user ./src
+	go build -o webapp ./src
 
 ## 開発用: go mod tidy + npm install + CSS ビルド + 起動
 dev:
@@ -25,6 +25,6 @@ dev:
 
 ## 生成物の削除
 clean:
-	rm -f web-sqlx-sqlite-user web-sqlx-sqlite-user.exe
+	rm -f webapp webapp.exe
 	rm -f user.sqlite3 _user.sqlite3
 	rm -f public/assets/css/style.css

@@ -1,7 +1,7 @@
 # ===== Go =====
 # バイナリ
-/web-sqlx-sqlite-user
-/web-sqlx-sqlite-user.exe
+/webapp
+/webapp.exe
 *.exe
 *.out
 

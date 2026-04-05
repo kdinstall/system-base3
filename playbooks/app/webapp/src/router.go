@@ -1,8 +1,8 @@
 package main
 
 import (
-	"web-sqlx-sqlite-user/src/controllers"
-	tmpl "web-sqlx-sqlite-user/src/lib/template"
+	"webapp/src/controllers"
+	tmpl "webapp/src/lib/template"
 
 	"github.com/gin-gonic/gin"
 )

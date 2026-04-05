@@ -3,8 +3,8 @@ package main
 import (
 	"log"
 	"os"
-	"web-sqlx-sqlite-user/src/config"
-	database "web-sqlx-sqlite-user/src/lib/database/sqlite"
+	"webapp/src/config"
+	database "webapp/src/lib/database/sqlite"
 )
 
 func main() {

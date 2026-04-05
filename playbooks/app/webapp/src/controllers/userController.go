@@ -3,8 +3,8 @@ package controllers
 import (
 	"net/http"
 	"strconv"
-	"web-sqlx-sqlite-user/src/db"
-	tmpl "web-sqlx-sqlite-user/src/lib/template"
+	"webapp/src/db"
+	tmpl "webapp/src/lib/template"
 
 	"github.com/gin-gonic/gin"
 )

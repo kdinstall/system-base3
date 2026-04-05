@@ -4,7 +4,7 @@ import (
 	"database/sql"
 	"log"
 	"sync"
-	"web-sqlx-sqlite-user/src/config"
+	"webapp/src/config"
 
 	"github.com/jmoiron/sqlx"
 	_ "modernc.org/sqlite"

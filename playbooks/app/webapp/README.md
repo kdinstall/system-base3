@@ -1,4 +1,4 @@
-# web-sqlx-sqlite-user
+# webapp
 
 Go + Gin + sqlx + SQLite + Tailwind CSS v4 によるユーザー管理 Web アプリケーションです。
 
@@ -64,7 +64,7 @@ go run ./src       # アプリ起動
 
 ### Go バイナリのビルド
 
-CSS をビルドしたうえで `web-sqlx-sqlite-user`（Windows では `.exe`）を生成します。
+CSS をビルドしたうえで `webapp`（Windows では `.exe`）を生成します。
 
 ```bash
 make binary
@@ -74,14 +74,14 @@ make binary
 
 ```bash
 npm run build                            # CSS ビルド
-go build -o web-sqlx-sqlite-user ./src  # バイナリ生成
+go build -o webapp ./src  # バイナリ生成
 ```
 
 生成したバイナリを直接実行する場合：
 
 ```bash
-./web-sqlx-sqlite-user        # Linux / macOS
-.\web-sqlx-sqlite-user.exe    # Windows
+./webapp        # Linux / macOS
+.\webapp.exe    # Windows
 ```
 
 ### `go run` で起動（開発時）
@@ -129,10 +129,10 @@ go run ./src
 
 ```bash
 npm run build
-go build -o web-sqlx-sqlite-user ./src
+go build -o webapp ./src
 
-./web-sqlx-sqlite-user        # Linux / macOS
-.\web-sqlx-sqlite-user.exe    # Windows
+./webapp        # Linux / macOS
+.\webapp.exe    # Windows
 ```
 
 ### `go run` で起動（開発時）
@@ -158,10 +158,10 @@ npm run watch
 
 ```bash
 # Linux / macOS
-rm -f web-sqlx-sqlite-user user.sqlite3 public/assets/css/style.css
+rm -f webapp user.sqlite3 public/assets/css/style.css
 
 # Windows (PowerShell)
-Remove-Item -ErrorAction SilentlyContinue web-sqlx-sqlite-user.exe, user.sqlite3, public\assets\css\style.css
+Remove-Item -ErrorAction SilentlyContinue webapp.exe, user.sqlite3, public\assets\css\style.css
 ```
 
 ## 環境変数

@@ -1,7 +1,7 @@
 package db
 
 import (
-	database "web-sqlx-sqlite-user/src/lib/database/sqlite"
+	database "webapp/src/lib/database/sqlite"
 
 	"github.com/jmoiron/sqlx"
 )

@@ -1,4 +1,4 @@
-# Copilot Instructions for web-sqlx-sqlite-user
+# Copilot Instructions for webapp
 
 ## プロジェクト概要
 - このリポジトリは Go + Gin + sqlx + SQLite + Tailwind CSS v4 で実装されたユーザー管理アプリです。

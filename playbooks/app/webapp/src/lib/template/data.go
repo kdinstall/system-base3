@@ -2,7 +2,7 @@ package tmpl
 
 import (
 	"time"
-	"web-sqlx-sqlite-user/src/config"
+	"webapp/src/config"
 
 	"github.com/gin-gonic/gin"
 )
